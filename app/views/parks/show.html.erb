@@ -1,0 +1,26 @@
+<h1 class="text-center"><%= @park.name %></h1>
+<div class="container">
+	<div>
+		<img class="img-responsive" src="<%= @park.picture %>" alt="">
+	</div>
+	<div>
+		<h4><%= @park.description %></h4>
+	</div>
+
+
+<div>
+	<h2>Rangers on Duty:</h2>
+		<% @park.rangers.each do |r| %>
+			<div class="alert alert-info">
+				<h3>
+					<a href="/rangers/<%= r.id %>">Ranger<% r.name %></a>
+				</h3>
+			</div>
+		<% end %>
+	</div>
+		<h2>Available Actions:</h2>
+			<%= link_to 'Edit This Park?', edit_park_path(@park), method: :get, :class => "btn btn-warning" %>
+			<%= link_to 'Delete This Park?', park_path(@park), method: :delete, :class => "btn btn-danger" %>
+	</div>
+
+

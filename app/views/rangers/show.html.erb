@@ -1,0 +1,21 @@
+<h1 class="text-center">Ranger <%= @ranger.name %>'s Page</h1>
+<h4 class="text-center">Ranger <%= @ranger.name %> works at America's National Parks in all seasons of the year.</h4>
+
+<h2 class="text-center">Parks where you can spot Ranger <%= @ranger.name %></h2>
+
+<div class="container text-center">
+	<% if @ranger.parks.length > 0 %>
+		<% @ranger.parks.each do |p| %>
+			<div class="alert alert-info">
+				<h3>
+					<a href="/parks/<%= p.id %>"><%= p.name %></a>
+				</h3>	
+			</div>
+		<% end %>
+	<% else %>
+		<div class="alert alert-info">
+			Ranger <%= @ranger.name %> is still waiting to be assigned to a park.
+		</div>
+	<% end %>
+</div>
+

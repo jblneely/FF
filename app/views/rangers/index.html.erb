@@ -1,0 +1,13 @@
+<h1 class="text-center">Meet our friendly staff</h1>
+<h3 class="text-center">Here is a list of our park rangers, hard at work.</h3>
+
+<div class="container">
+	<% @rangers.each do |r| %>
+		<div class="alert alert-info">
+			<a href="/rangers/<%= r.id %>">
+				Ranger <%= r.name %>
+			</a>
+		</div>
+
+	<% end %>
+</div>

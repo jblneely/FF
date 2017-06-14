@@ -1,0 +1,13 @@
+<h1 class="text-center">Add a New Ranger</h1>
+
+<div class="continer">
+<%= form_for @ranger do |f| %>
+	<div class="form-group">
+		<%= f.label :name %>
+		<%= f.text_field :name, :class => "form-control" %>
+	</div>
+		<%= f.collection_check_boxes :park_ids, @parks, :id, :name %>
+		<%= f.submit :class => "btn btn-primary" %>
+
+<% end %>
+</div>

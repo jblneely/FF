@@ -1,0 +1,2842 @@
+  [1m[35m (46.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (21.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (23.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(848569287781216155);[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateParks (20170608204357)
+  [1m[35m (8.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.9ms)[0m  [1m[35mCREATE TABLE "parks" ("id" bigserial primary key, "name" character varying, "description" text, "picture" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (5.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170608204357"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRangers (20170608204500)
+  [1m[35m (6.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (15.8ms)[0m  [1m[35mCREATE TABLE "rangers" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170608204500"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateParksRangers (20170608204710)
+  [1m[35m (6.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (30.3ms)[0m  [1m[35mCREATE TABLE "parks_rangers" ("id" bigserial primary key, "park_id" bigint, "ranger_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_8b01a5d7c7"
+FOREIGN KEY ("park_id")
+  REFERENCES "parks" ("id")
+, CONSTRAINT "fk_rails_456f59d45b"
+FOREIGN KEY ("ranger_id")
+  REFERENCES "rangers" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_parks_rangers_on_park_id" ON "parks_rangers"  ("park_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_parks_rangers_on_ranger_id" ON "parks_rangers"  ("ranger_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170608204710"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-06-08 20:48:34.503793"], ["updated_at", "2017-06-08 20:48:34.503793"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(848569287781216155)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (4.0ms)[0m  [1m[32mINSERT INTO "rangers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bob"], ["created_at", "2017-06-08 20:54:16.609731"], ["updated_at", "2017-06-08 20:54:16.609731"]]
+  [1m[35m (12.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "rangers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Rick"], ["created_at", "2017-06-08 20:55:09.709702"], ["updated_at", "2017-06-08 20:55:09.709702"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "rangers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Smith"], ["created_at", "2017-06-08 20:55:09.715128"], ["updated_at", "2017-06-08 20:55:09.715128"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "rangers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Julie"], ["created_at", "2017-06-08 20:55:09.717466"], ["updated_at", "2017-06-08 20:55:09.717466"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:12:35 -0700
+  [1m[35m (7.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jblneely/.rvm/gems/ruby-2.4.0/gems/railties-5.1.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jblneely/.rvm/gems/ruby-2.4.0/gems/railties-5.1.1/lib/rails/templates/rails/welcome/index.html.erb (4.2ms)
+Completed 200 OK in 23ms (Views: 11.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:13:04 -0700
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jblneely/.rvm/gems/ruby-2.4.0/gems/railties-5.1.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jblneely/.rvm/gems/ruby-2.4.0/gems/railties-5.1.1/lib/rails/templates/rails/welcome/index.html.erb (2.5ms)
+Completed 200 OK in 8ms (Views: 4.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:13:31 -0700
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:13:41 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 765ms (Views: 762.8ms | ActiveRecord: 0.0ms)
+
+
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 33ms (Views: 29.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:16:28 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 22ms (Views: 19.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:16:35 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 15ms (Views: 13.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:30:55 -0700
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 282ms (Views: 272.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:31:01 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  Rendered rangers/index.html.erb within layouts/application (5.7ms)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    2: <h3 class="text-center">Here is a list of our park rangers, hard at work.</h3>
+    3: 
+    4: <div class="container">
+    5: 	<% @rangers.each do |r| %>
+    6: 		<div class="alert alert-info">
+    7: 			<a href="/rangers/<% r.id %>">
+    8: 				Ranger <% r.name %>
+  
+app/views/rangers/index.html.erb:5:in `_app_views_rangers_index_html_erb__2184340832635327594_70180299562500'
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:31:04 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 17ms (Views: 15.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:31:14 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  Rendered rangers/index.html.erb within layouts/application (2.8ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    2: <h3 class="text-center">Here is a list of our park rangers, hard at work.</h3>
+    3: 
+    4: <div class="container">
+    5: 	<% @rangers.each do |r| %>
+    6: 		<div class="alert alert-info">
+    7: 			<a href="/rangers/<% r.id %>">
+    8: 				Ranger <% r.name %>
+  
+app/views/rangers/index.html.erb:5:in `_app_views_rangers_index_html_erb__2184340832635327594_70180280542120'
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:33:25 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (1.2ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers"[0m
+  Rendered rangers/index.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 64ms (Views: 26.0ms | ActiveRecord: 15.8ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:34:23 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (1.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (12.5ms)
+Completed 200 OK in 43ms (Views: 24.5ms | ActiveRecord: 6.5ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:34:25 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 19ms (Views: 16.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:35:01 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 19ms (Views: 16.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:35:04 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 20ms (Views: 17.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:35:58 -0700
+  
+SyntaxError (/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+nger = Ranger.find(params[id:])
+                              ^
+/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:36:00 -0700
+  
+SyntaxError (/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+nger = Ranger.find(params[id:])
+                              ^
+/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:41:38 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 17ms (Views: 15.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:41:42 -0700
+  
+SyntaxError (/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+nger = Ranger.find(params[id:])
+                              ^
+/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:41:46 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 17ms (Views: 14.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:41:48 -0700
+  
+SyntaxError (/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+nger = Ranger.find(params[id:])
+                              ^
+/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:41:50 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 17ms (Views: 14.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 14:47:18 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/parks"):
+  
+actionpack (5.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.1) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:47:29 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 18ms (Views: 16.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:47:31 -0700
+  
+SyntaxError (/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+nger = Ranger.find(params[id:])
+                              ^
+/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:48:08 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 24ms (Views: 22.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:49:34 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 19ms (Views: 17.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:49:38 -0700
+  
+SyntaxError (/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+nger = Ranger.find(params[id:])
+                              ^
+/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/rangers_controller.rb:7: syntax error, unexpected ']'
+app/controllers/rangers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:51:23 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 39ms (Views: 19.9ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:51:28 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 24ms (Views: 21.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 14:51:30 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 24ms (Views: 21.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 14:51:32 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 31ms (Views: 27.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-08 14:51:34 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  Rendered rangers/show.html.erb within layouts/application (1.0ms)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.7ms)
+
+
+  
+SyntaxError (/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/views/rangers/show.html.erb:21: syntax error, unexpected keyword_ensure, expecting keyword_end
+          ensure
+                ^
+/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/views/rangers/show.html.erb:23: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/views/rangers/show.html.erb:21: syntax error, unexpected keyword_ensure, expecting keyword_end
+app/views/rangers/show.html.erb:23: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-08 14:52:52 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (19.0ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (72.3ms)
+Completed 200 OK in 97ms (Views: 64.7ms | ActiveRecord: 28.5ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "parks" ("name", "description", "picture", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Yosemite"], ["description", "Yosemite National Park (/joʊˈsɛmᵻti/ yoh-SEM-it-ee[4]) is a national park spanning portions of Tuolumne, Mariposa and Madera counties in Northern California.[5][6] The park, which is managed by the National Park Service, covers an area of 747,956 acres (1,168.681 sq mi; 302,687 ha; 3,026.87 km2)[2] and reaches across the western slopes of the Sierra Nevada mountain range.[7] On average, about 4 million people visit Yosemite each year,[3] and most spend the majority of their time in the seven square miles (18 km2) of Yosemite Valley.[8] The park set a visitation record in 2016, surpassing 5 million visitors for the first time in its history.[9]"], ["picture", "https://www.nps.gov/yose/planyourvisit/images/P8070189_2.jpg"], ["created_at", "2017-06-08 22:09:33.941717"], ["updated_at", "2017-06-08 22:09:33.941717"]]
+  [1m[35m (13.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-08 15:17:25 -0700
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.7ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (47.0ms)
+Completed 200 OK in 312ms (Views: 252.3ms | ActiveRecord: 11.2ms)
+
+
+Started POST "/rangers" for 127.0.0.1 at 2017-06-08 15:17:57 -0700
+Processing by RangersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"cwqtDYqaETGZmNjG+rd8M/1aBP6TT1WGR0yrssKu3Eu9mtco5aLGeoz5oOhK0YbaMTek1e2w9UYBTbgeYLkWzg==", "ranger"=>{"name"=>"John", "park_ids"=>["", "1"]}, "commit"=>"Create Ranger"}
+No template found for RangersController#create, rendering head :no_content
+Completed 204 No Content in 63ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-08 15:19:44 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.7ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (17.3ms)
+Completed 200 OK in 57ms (Views: 47.4ms | ActiveRecord: 7.5ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-08 15:24:19 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 87ms (Views: 45.2ms | ActiveRecord: 10.1ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-08 15:24:23 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 37ms (Views: 34.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-08 15:24:37 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 38ms (Views: 34.8ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/rangers" for 127.0.0.1 at 2017-06-08 15:24:52 -0700
+Processing by RangersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"GsvV0IsmbZuS7xvWB/tPcg40SvhUh0O4Aem9bKF0F+INAlsN+OFx4zQoZ3dBx8WnS11f641PYtJ3tgWHy1H/Dw==", "ranger"=>{"name"=>"John", "park_ids"=>["", "1"]}, "commit"=>"Create Ranger"}
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" WHERE "parks"."id" = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "rangers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "John"], ["created_at", "2017-06-08 22:24:52.948527"], ["updated_at", "2017-06-08 22:24:52.948527"]]
+  [1m[35mSQL (26.7ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 1], ["ranger_id", 5], ["created_at", "2017-06-08 22:24:52.950541"], ["updated_at", "2017-06-08 22:24:52.950541"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/rangers
+Completed 302 Found in 74ms (ActiveRecord: 39.9ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 15:24:52 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 17ms (Views: 14.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/rangers/5" for 127.0.0.1 at 2017-06-08 15:25:03 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.9ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 5]]
+  Rendered rangers/show.html.erb within layouts/application (14.2ms)
+Completed 200 OK in 37ms (Views: 30.5ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:38:43 -0700
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/parks"):
+  
+actionpack (5.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.1) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.1) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.1) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:41:03 -0700
+Started GET "/" for 127.0.0.1 at 2017-06-08 15:41:13 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (1.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 345ms (Views: 317.5ms | ActiveRecord: 7.2ms)
+
+
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 23ms (Views: 20.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:41:16 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 40ms (Views: 22.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:44:07 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (1.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 24ms (Views: 20.9ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:44:09 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 34ms (Views: 30.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 15:44:10 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (1.2ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (22.3ms)
+Completed 200 OK in 72ms (Views: 33.8ms | ActiveRecord: 12.9ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:44:11 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 44ms (Views: 41.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:44:15 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 28ms (Views: 24.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 15:44:17 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 29ms (Views: 26.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:44:19 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 29ms (Views: 26.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:44:58 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 29ms (Views: 26.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:45:00 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 30ms (Views: 26.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 15:45:01 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 31ms (Views: 27.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 15:45:02 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  Rendered parks/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 32ms (Views: 28.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-08 15:45:05 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (37.6ms)
+Completed 200 OK in 58ms (Views: 55.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 15:45:06 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  Rendered parks/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 30ms (Views: 27.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 15:45:07 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 39ms (Views: 35.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/5" for 127.0.0.1 at 2017-06-08 15:45:54 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.8ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 5]]
+  Rendered rangers/show.html.erb within layouts/application (17.8ms)
+Completed 200 OK in 44ms (Views: 31.0ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:45:58 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 29ms (Views: 26.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:45:59 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 27ms (Views: 24.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:47:52 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 20ms (Views: 18.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:47:58 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 19ms (Views: 16.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:47:59 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 24ms (Views: 21.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:48:00 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 39ms (Views: 35.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 15:48:02 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 27ms (Views: 24.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 15:48:05 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 26ms (Views: 23.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 15:48:07 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 38ms (Views: 34.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 15:48:08 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 35ms (Views: 32.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 15:48:08 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 27ms (Views: 24.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 15:48:08 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 28ms (Views: 25.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 15:48:09 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 26ms (Views: 23.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 15:48:10 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 31ms (Views: 27.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 15:48:12 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 26ms (Views: 24.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 15:48:16 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 25ms (Views: 23.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 15:48:17 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 41ms (Views: 37.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 15:48:18 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 29ms (Views: 26.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:01:14 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 42ms (Views: 25.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:01:48 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (1.7ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Ranger Load (0.0ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Ranger Load (0.0ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mCACHE Ranger Load (0.0ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC LIMIT $1[0m  [["LIMIT", 11]]
+  Rendered parks/new.html.erb within layouts/application (125.5ms)
+Completed 500 Internal Server Error in 146ms (ActiveRecord: 7.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `tex_field' for #<ActionView::Helpers::FormBuilder:0x007fd4c4c0acb0>
+Did you mean?  text_field
+               date_field):
+     5: 	<%= form_for @park do |f| %>
+     6: 		<div class="form-group">
+     7: 			<%= f.label :name %>
+     8: 			<%= f.tex_field :name, :class => "form-control" %>
+     9: 		</div>
+    10: 		<div class="form-group">
+    11: 			<%= f.label :description %>
+  
+app/views/parks/new.html.erb:8:in `block in _app_views_parks_new_html_erb__656880139881690188_70275859048000'
+app/views/parks/new.html.erb:5:in `_app_views_parks_new_html_erb__656880139881690188_70275859048000'
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:04:09 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 25ms (Views: 22.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/parks" for 127.0.0.1 at 2017-06-08 16:05:16 -0700
+Processing by ParksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"l0w/19D/NPLktd9xBv3akGs54/1M6rT80YIRUFjhDsaAhbEKozgoikJyo9BAwVBFLlD27pUilZan3am7MsTmKw==", "park"=>{"name"=>"Mt. Ranier", "description"=>"It was established on March 2, 1899 as the fifth national park in the United States. The park encompasses 236,381 acres (369.35 sq mi; 956.60 km2) including all of Mount Rainier, a 14,411-foot (4,392 m) stratovolcano.\r\n", "picture"=>"https://media-cdn.tripadvisor.com/media/photo-s/01/d6/68/97/mt-rainier-natl-park.jpg", "ranger_ids"=>["", "1", "4", "2"]}, "commit"=>"Create Park"}
+Completed 500 Internal Server Error in 129ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `ranger_ids' for #<ParksController:0x007fd4c27473b0>
+Did you mean?  ranger_url):
+  
+app/controllers/parks_controller.rb:27:in `park_params'
+app/controllers/parks_controller.rb:20:in `create'
+Started GET "/" for 127.0.0.1 at 2017-06-08 16:14:01 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 30ms (Views: 27.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:14:04 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 32ms (Views: 29.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:14:05 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 51ms (Views: 48.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:14:07 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 39ms (Views: 35.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:14:08 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 34ms (Views: 30.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:14:09 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 30ms (Views: 27.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-08 16:14:11 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 31ms (Views: 26.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:14:14 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 32ms (Views: 28.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:14:16 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.7ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 29ms (Views: 26.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-08 16:14:18 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 34ms (Views: 30.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:14:19 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 41ms (Views: 37.3ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/parks" for 127.0.0.1 at 2017-06-08 16:14:27 -0700
+Processing by ParksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WjLqUg8ybpwzXvY2QKBuf7Lknbs2ae8hJA+T/yuXnjZvyWntH166jK7dh9s7Fjn8NFfwv1fkcpoMRAP1bWrxrg==", "park"=>{"name"=>"ranier", "description"=>"asd;flkjasdf", "picture"=>"", "ranger_ids"=>[""]}, "commit"=>"Create Park"}
+Completed 500 Internal Server Error in 130ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `ranger_ids' for #<ParksController:0x007fd4c3c6a300>
+Did you mean?  ranger_url):
+  
+app/controllers/parks_controller.rb:27:in `park_params'
+app/controllers/parks_controller.rb:20:in `create'
+Started POST "/parks" for 127.0.0.1 at 2017-06-08 16:15:22 -0700
+Processing by ParksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WjLqUg8ybpwzXvY2QKBuf7Lknbs2ae8hJA+T/yuXnjZvyWntH166jK7dh9s7Fjn8NFfwv1fkcpoMRAP1bWrxrg==", "park"=>{"name"=>"ranier", "description"=>"asd;flkjasdf", "picture"=>"", "ranger_ids"=>[""]}, "commit"=>"Create Park"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" WHERE 1=0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.1ms)[0m  [1m[32mINSERT INTO "parks" ("name", "description", "picture", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "ranier"], ["description", "asd;flkjasdf"], ["picture", ""], ["created_at", "2017-06-08 23:15:22.779627"], ["updated_at", "2017-06-08 23:15:22.779627"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/parks
+Completed 302 Found in 39ms (ActiveRecord: 7.9ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:15:22 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 24ms (Views: 22.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:15:26 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 29ms (Views: 26.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:15:27 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 29ms (Views: 26.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:15:29 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 39ms (Views: 34.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:15:30 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 44ms (Views: 41.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:15:30 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 39ms (Views: 35.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:15:30 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 35ms (Views: 31.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:15:31 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 35ms (Views: 33.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:15:31 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 38ms (Views: 34.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:15:35 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (1.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 28ms (Views: 24.3ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:15:36 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 31ms (Views: 28.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:15:37 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 30ms (Views: 26.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:15:38 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 30ms (Views: 26.6ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-08 16:15:39 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (1.1ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 34ms (Views: 29.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:15:41 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 38ms (Views: 35.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-08 16:15:43 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 38ms (Views: 34.5ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/rangers" for 127.0.0.1 at 2017-06-08 16:15:54 -0700
+Processing by RangersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QXZ9U8FcbeqEAutpZxZbP7Gf3KNnmUlY+ElgmBKcBTaP5gd2rmS6oZFjk0fXcKHWffJ8iBlm6Zi+SHM0sIvPsw==", "ranger"=>{"name"=>"bowman", "park_ids"=>["", "2"]}, "commit"=>"Create Ranger"}
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" WHERE "parks"."id" = 2[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "rangers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "bowman"], ["created_at", "2017-06-08 23:15:54.098477"], ["updated_at", "2017-06-08 23:15:54.098477"]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 2], ["ranger_id", 6], ["created_at", "2017-06-08 23:15:54.100156"], ["updated_at", "2017-06-08 23:15:54.100156"]]
+  [1m[35m (6.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/rangers
+Completed 302 Found in 46ms (ActiveRecord: 14.9ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:15:54 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 21ms (Views: 18.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/6" for 127.0.0.1 at 2017-06-08 16:15:55 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mRanger Load (0.2ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.7ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 6]]
+  Rendered rangers/show.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 38ms (Views: 33.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:18:16 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 26ms (Views: 23.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:18:18 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 31ms (Views: 28.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:18:20 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 31ms (Views: 27.9ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/parks" for 127.0.0.1 at 2017-06-08 16:18:32 -0700
+Processing by ParksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"BiGcY1lk3D6lxrQdO29wLTe1258ZnH05EsbA3PahxOgz2h/cSQgILjhFxfBA2SeusQa2m3gR4II6jVDWsFyrcA==", "park"=>{"name"=>"baker", "description"=>"ski it in june", "picture"=>"", "ranger_ids"=>[""]}, "commit"=>"Create Park"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" WHERE 1=0[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "parks" ("name", "description", "picture", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "baker"], ["description", "ski it in june"], ["picture", ""], ["created_at", "2017-06-08 23:18:32.581936"], ["updated_at", "2017-06-08 23:18:32.581936"]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/parks
+Completed 302 Found in 15ms (ActiveRecord: 7.9ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:18:32 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 27ms (Views: 24.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:18:35 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 25ms (Views: 23.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:18:36 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 28ms (Views: 24.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:18:36 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 30ms (Views: 27.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:19:05 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (12.4ms)
+Completed 200 OK in 47ms (Views: 33.2ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:19:06 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 33ms (Views: 29.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:19:07 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 33ms (Views: 29.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:19:07 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 29ms (Views: 26.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:20:17 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 32ms (Views: 28.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:20:18 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 26ms (Views: 22.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:20:20 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 34ms (Views: 30.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:20:21 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 30ms (Views: 26.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:27:26 -0700
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (1.1ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (15.2ms)
+Completed 200 OK in 262ms (Views: 222.8ms | ActiveRecord: 7.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 16:27:28 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 26ms (Views: 23.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 16:27:29 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 24ms (Views: 21.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:27:30 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (1.1ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (18.9ms)
+Completed 200 OK in 42ms (Views: 29.2ms | ActiveRecord: 10.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:27:33 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 32ms (Views: 28.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:27:36 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (1.2ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 55ms (Views: 50.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:27:38 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 40ms (Views: 36.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:27:39 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (1.2ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (12.5ms)
+Completed 200 OK in 56ms (Views: 27.9ms | ActiveRecord: 5.6ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:27:40 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (45.4ms)
+Completed 200 OK in 81ms (Views: 76.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:27:51 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 33ms (Views: 30.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:27:53 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 41ms (Views: 37.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:27:54 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 35ms (Views: 33.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:27:57 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 41ms (Views: 38.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:27:58 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.7ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 33ms (Views: 29.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:27:58 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 29ms (Views: 24.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:27:58 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 30ms (Views: 26.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:27:58 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 27ms (Views: 24.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:27:59 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 28ms (Views: 24.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:28:03 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 33ms (Views: 29.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:28:04 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 58ms (Views: 54.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-08 16:28:05 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (14.4ms)
+Completed 200 OK in 41ms (Views: 37.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:28:14 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 40ms (Views: 36.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/parks" for 127.0.0.1 at 2017-06-08 16:28:29 -0700
+Processing by ParksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"asEVZwCwpOOjTOiRY3D6B9ti1lUDIghOC1wRAzjRITxfOpbYENxw8z7PmXwYxq2EXdG7UWKvlfUjF4EJfixOpA==", "park"=>{"name"=>"test park", "description"=>"asdf;lkjadsf", "picture"=>"", "ranger_ids"=>["", "5"]}, "commit"=>"Create Park"}
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" WHERE "rangers"."id" = 5[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "parks" ("name", "description", "picture", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "test park"], ["description", "asdf;lkjadsf"], ["picture", ""], ["created_at", "2017-06-08 23:28:29.032973"], ["updated_at", "2017-06-08 23:28:29.032973"]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 4], ["ranger_id", 5], ["created_at", "2017-06-08 23:28:29.035626"], ["updated_at", "2017-06-08 23:28:29.035626"]]
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/parks
+Completed 302 Found in 39ms (ActiveRecord: 18.2ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:28:29 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 21ms (Views: 18.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:28:31 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 25ms (Views: 22.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:32:06 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (12.2ms)
+Completed 200 OK in 43ms (Views: 27.7ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:32:23 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 42ms (Views: 38.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:32:24 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (1.1ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 38ms (Views: 34.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:32:25 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 30ms (Views: 26.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:32:25 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 32ms (Views: 28.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:32:26 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 28ms (Views: 25.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:32:29 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 32ms (Views: 27.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:32:30 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 51ms (Views: 24.4ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-08 16:32:32 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.8ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (21.1ms)
+Completed 200 OK in 54ms (Views: 42.3ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:32:35 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 35ms (Views: 31.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:32:36 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 35ms (Views: 31.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/5" for 127.0.0.1 at 2017-06-08 16:32:37 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.7ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 5]]
+  Rendered rangers/show.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 35ms (Views: 28.8ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:32:40 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 30ms (Views: 26.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/2" for 127.0.0.1 at 2017-06-08 16:32:42 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 2]]
+  Rendered rangers/show.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 29ms (Views: 23.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:32:44 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 35ms (Views: 31.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/6" for 127.0.0.1 at 2017-06-08 16:32:45 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 6]]
+  Rendered rangers/show.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 42ms (Views: 36.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-08 16:32:48 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (1.2ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (14.2ms)
+Completed 200 OK in 37ms (Views: 33.3ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/parks" for 127.0.0.1 at 2017-06-08 16:33:06 -0700
+Processing by ParksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LKLSZ6hddRPgnwBtF7eNGKfNc+z4ruTi6M/OJk7at0IZWVHYuDGhA30ccYBsAdqbIX4e6JkjeVnAhF4sCCfY2g==", "park"=>{"name"=>"helens", "description"=>"volcano", "picture"=>"", "ranger_ids"=>["", "1", "5", "4", "2", "3", "6"]}, "commit"=>"Create Park"}
+  [1m[36mRanger Load (6.7ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" WHERE "rangers"."id" IN (1, 5, 4, 2, 3, 6)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "parks" ("name", "description", "picture", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "helens"], ["description", "volcano"], ["picture", ""], ["created_at", "2017-06-08 23:33:06.861742"], ["updated_at", "2017-06-08 23:33:06.861742"]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 5], ["ranger_id", 1], ["created_at", "2017-06-08 23:33:06.863725"], ["updated_at", "2017-06-08 23:33:06.863725"]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 5], ["ranger_id", 5], ["created_at", "2017-06-08 23:33:06.865540"], ["updated_at", "2017-06-08 23:33:06.865540"]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 5], ["ranger_id", 4], ["created_at", "2017-06-08 23:33:06.867074"], ["updated_at", "2017-06-08 23:33:06.867074"]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 5], ["ranger_id", 2], ["created_at", "2017-06-08 23:33:06.868434"], ["updated_at", "2017-06-08 23:33:06.868434"]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 5], ["ranger_id", 3], ["created_at", "2017-06-08 23:33:06.869804"], ["updated_at", "2017-06-08 23:33:06.869804"]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 5], ["ranger_id", 6], ["created_at", "2017-06-08 23:33:06.872245"], ["updated_at", "2017-06-08 23:33:06.872245"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/parks
+Completed 302 Found in 39ms (ActiveRecord: 12.3ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:33:06 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 22ms (Views: 19.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:33:11 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 29ms (Views: 26.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:33:12 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 37ms (Views: 33.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:33:41 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 33ms (Views: 27.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/6" for 127.0.0.1 at 2017-06-08 16:33:44 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 6]]
+  Rendered rangers/show.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 31ms (Views: 26.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/rangers/2" for 127.0.0.1 at 2017-06-08 16:33:51 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.7ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 2]]
+  Rendered rangers/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 38ms (Views: 33.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:43:20 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 44ms (Views: 23.5ms | ActiveRecord: 5.9ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:43:21 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 30ms (Views: 26.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:43:28 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (1.2ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (16.8ms)
+Completed 200 OK in 65ms (Views: 34.5ms | ActiveRecord: 7.5ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-08 16:43:29 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.8ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 46ms (Views: 40.2ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 16:43:33 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 33ms (Views: 30.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:43:35 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 34ms (Views: 30.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:44:10 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 31ms (Views: 28.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/" for 127.0.0.1 at 2017-06-08 16:44:11 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 27ms (Views: 24.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:44:13 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 42ms (Views: 38.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-08 16:44:14 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 39ms (Views: 33.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:44:15 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.9ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 36ms (Views: 31.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:45:31 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 29ms (Views: 26.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/1" for 127.0.0.1 at 2017-06-08 16:45:38 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 1]]
+  Rendered parks/show.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 31ms (Views: 27.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/parks/1/edit" for 127.0.0.1 at 2017-06-08 16:45:43 -0700
+Processing by ParksController#edit as HTML
+  Parameters: {"authenticity_token"=>"onSIC9imM7GqxXtIpw7HOaWgCpzQu1EsZWpzKwEwsxO1vQbWq2EvyQwCB+nhMk3s4MkfjwlzcEYTNcvAaxVb/g==", "id"=>"1"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering parks/edit.html.erb within layouts/application
+  Rendered parks/edit.html.erb within layouts/application (0.7ms)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.3ms)
+
+
+  
+SyntaxError (/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/views/parks/edit.html.erb:7: syntax error, unexpected ':', expecting ')'
+me, :class => "form-control" :value => @park.name );@output_
+                              ^
+/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/views/parks/edit.html.erb:11: syntax error, unexpected ':', expecting ')'
+on, :class => "form-control" :value => @park.description );@
+                              ^):
+  
+app/views/parks/edit.html.erb:7: syntax error, unexpected ':', expecting ')'
+app/views/parks/edit.html.erb:11: syntax error, unexpected ':', expecting ')'
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:45:51 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 26ms (Views: 23.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-08 16:45:53 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.8ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 29ms (Views: 24.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-08 16:46:48 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 20ms (Views: 16.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/parks/5" for 127.0.0.1 at 2017-06-08 16:46:51 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.7ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 5]]
+  Rendered parks/show.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 31ms (Views: 27.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/rangers/2" for 127.0.0.1 at 2017-06-08 16:46:53 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mRanger Load (0.2ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 2]]
+  Rendered rangers/show.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 31ms (Views: 27.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/rangers/4" for 127.0.0.1 at 2017-06-08 16:47:00 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 4]]
+  Rendered rangers/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 36ms (Views: 32.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/parks/5" for 127.0.0.1 at 2017-06-08 16:47:04 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.8ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 5]]
+  Rendered parks/show.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 38ms (Views: 32.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/parks/5" for 127.0.0.1 at 2017-06-08 16:47:12 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.8ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 5]]
+  Rendered parks/show.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 35ms (Views: 29.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 16:47:22 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 24ms (Views: 22.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:47:23 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 35ms (Views: 32.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-08 16:47:25 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 32ms (Views: 28.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:47:31 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 33ms (Views: 30.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/1" for 127.0.0.1 at 2017-06-08 16:47:32 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 1]]
+  Rendered parks/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 36ms (Views: 31.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/parks/1/edit" for 127.0.0.1 at 2017-06-08 16:47:42 -0700
+Processing by ParksController#edit as HTML
+  Parameters: {"authenticity_token"=>"08Wj3EF6pl9El2RlwN40bkJa4TXkRejtVWo9sfD8YDPEDC0BMr26J+JQGMSG4r67BzP0Jj2NyYcjNYVamtmI3g==", "id"=>"1"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering parks/edit.html.erb within layouts/application
+  Rendered parks/edit.html.erb within layouts/application (0.8ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.3ms)
+
+
+  
+SyntaxError (/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/views/parks/edit.html.erb:7: syntax error, unexpected ':', expecting ')'
+me, :class => "form-control" :value => @park.name );@output_
+                              ^
+/Users/jblneely/wdi/code-examples/rails_mm/rails-mtom/app/views/parks/edit.html.erb:11: syntax error, unexpected ':', expecting ')'
+on, :class => "form-control" :value => @park.description );@
+                              ^):
+  
+app/views/parks/edit.html.erb:7: syntax error, unexpected ':', expecting ')'
+app/views/parks/edit.html.erb:11: syntax error, unexpected ':', expecting ')'
+Started GET "/parks/1/edit" for 127.0.0.1 at 2017-06-08 16:50:22 -0700
+Processing by ParksController#edit as HTML
+  Parameters: {"authenticity_token"=>"08Wj3EF6pl9El2RlwN40bkJa4TXkRejtVWo9sfD8YDPEDC0BMr26J+JQGMSG4r67BzP0Jj2NyYcjNYVamtmI3g==", "id"=>"1"}
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering parks/edit.html.erb within layouts/application
+  Rendered parks/edit.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 24ms (Views: 20.7ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/parks/1" for 127.0.0.1 at 2017-06-08 16:50:28 -0700
+Processing by ParksController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dKcNBwRyntxBoMGVX01cxqwOcVjahUaX7GTlX1YYjNJjboPad7WCpOdnvTQZcdYT6WdkSwNNZ/2aO120PD1kPw==", "park"=>{"name"=>"Yosemite National Park", "description"=>"Yosemite National Park (/joʊˈsɛmᵻti/ yoh-SEM-it-ee[4]) is a national park spanning portions of Tuolumne, Mariposa and Madera counties in Northern California.[5][6] The park, which is managed by the National Park Service, covers an area of 747,956 acres (1,168.681 sq mi; 302,687 ha; 3,026.87 km2)[2] and reaches across the western slopes of the Sierra Nevada mountain range.[7] On average, about 4 million people visit Yosemite each year,[3] and most spend the majority of their time in the seven square miles (18 km2) of Yosemite Valley.[8] The park set a visitation record in 2016, surpassing 5 million visitors for the first time in its history.[9]", "picture"=>"https://www.nps.gov/yose/planyourvisit/images/P8070189_2.jpg"}, "commit"=>"Update Park", "id"=>"1"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (25.8ms)[0m  [1m[33mUPDATE "parks" SET "name" = $1, "updated_at" = $2 WHERE "parks"."id" = $3[0m  [["name", "Yosemite National Park"], ["updated_at", "2017-06-08 23:50:28.695785"], ["id", 1]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/parks
+Completed 302 Found in 32ms (ActiveRecord: 27.1ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:50:28 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 25ms (Views: 21.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/3" for 127.0.0.1 at 2017-06-08 16:50:31 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 3]]
+  Rendered parks/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 28ms (Views: 23.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/parks/3/edit" for 127.0.0.1 at 2017-06-08 16:50:36 -0700
+Processing by ParksController#edit as HTML
+  Parameters: {"authenticity_token"=>"c2Oy3uWtXTnrCEWkYtUvfmSEhcHkmQXJSxDwQ0dVuPZkqjwDlmpBQU3POQUk6aWrIe2Q0j1RJKM9T0ioLXBQGw==", "id"=>"3"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering parks/edit.html.erb within layouts/application
+  Rendered parks/edit.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 24ms (Views: 20.7ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/parks/3" for 127.0.0.1 at 2017-06-08 16:52:14 -0700
+Processing by ParksController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"h5FfBOebplkI3vF5QuSZIxogZCe81iNb2cLKa+CV2smQWNHZlFy6Ia4ZjdgE2BP2X0lxNGUeAjGvnXKAirAyJA==", "park"=>{"name"=>"Mt. Baker National Park", "description"=>"Snow and ice-covered Mount Baker, located in northern Washington, is the highest peak in the North Cascades (3,286 m or 10,781 ft) and the northernmost volcano in the conterminous United States. It is the only U.S. volcano in the Cascade Range that has been affected by both alpine and continental glaciation.Jan 3, 2017", "picture"=>"https://volcanoes.usgs.gov/vsc/images/baker/Mount-Baker-home.jpg"}, "commit"=>"Update Park", "id"=>"3"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "parks" SET "name" = $1, "description" = $2, "picture" = $3, "updated_at" = $4 WHERE "parks"."id" = $5[0m  [["name", "Mt. Baker National Park"], ["description", "Snow and ice-covered Mount Baker, located in northern Washington, is the highest peak in the North Cascades (3,286 m or 10,781 ft) and the northernmost volcano in the conterminous United States. It is the only U.S. volcano in the Cascade Range that has been affected by both alpine and continental glaciation.Jan 3, 2017"], ["picture", "https://volcanoes.usgs.gov/vsc/images/baker/Mount-Baker-home.jpg"], ["updated_at", "2017-06-08 23:52:14.477896"], ["id", 3]]
+  [1m[35m (5.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/parks
+Completed 302 Found in 13ms (ActiveRecord: 6.9ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:52:14 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 29ms (Views: 26.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:52:18 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 28ms (Views: 25.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/3" for 127.0.0.1 at 2017-06-08 16:52:21 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 3]]
+  Rendered parks/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 30ms (Views: 26.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/parks/3/edit" for 127.0.0.1 at 2017-06-08 16:52:27 -0700
+Processing by ParksController#edit as HTML
+  Parameters: {"authenticity_token"=>"HRcKbg3Sa4bycW+MFEi58eCie5JsZO/aCFuu8SkgbPgK3oSzfhV3/lS2Ey1SdDMkpctugbWszrB+BBYaQwWEFQ==", "id"=>"3"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering parks/edit.html.erb within layouts/application
+  Rendered parks/edit.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 26ms (Views: 22.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-08 16:52:31 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 26ms (Views: 23.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-08 16:52:34 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 25ms (Views: 21.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-08 16:52:35 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.2ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 28ms (Views: 24.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/rangers/4" for 127.0.0.1 at 2017-06-08 16:52:40 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 4]]
+  Rendered rangers/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 29ms (Views: 25.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/rangers/3" for 127.0.0.1 at 2017-06-08 16:52:44 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 3]]
+  Rendered rangers/show.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 32ms (Views: 28.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/rangers/6" for 127.0.0.1 at 2017-06-08 16:52:49 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mRanger Load (0.2ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 6]]
+  Rendered rangers/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 29ms (Views: 25.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/2" for 127.0.0.1 at 2017-06-08 16:52:57 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 2]]
+  Rendered parks/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 28ms (Views: 24.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/rangers/6" for 127.0.0.1 at 2017-06-08 16:52:59 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 6]]
+  Rendered rangers/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 32ms (Views: 27.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/rangers/6" for 127.0.0.1 at 2017-06-08 16:57:08 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mRanger Load (0.2ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 6]]
+  Rendered rangers/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 31ms (Views: 27.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-13 10:49:37 -0700
+  [1m[35m (3.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 249ms (Views: 236.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 10:50:02 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (23.9ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (42.7ms)
+Completed 200 OK in 84ms (Views: 24.9ms | ActiveRecord: 34.2ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 10:50:09 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 48ms (Views: 44.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-13 10:50:14 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.8ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 48ms (Views: 26.1ms | ActiveRecord: 5.3ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-13 10:50:18 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.7ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (67.6ms)
+Completed 200 OK in 103ms (Views: 98.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-13 10:50:20 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 48ms (Views: 43.9ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/rangers" for 127.0.0.1 at 2017-06-13 10:50:38 -0700
+Processing by RangersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"24GRax7lZnTzF/a3tr+Xlb0+58mdSzh1rxPL1KWBDycVEetOcd2xP+Z2jpkG2W18cVNH4uO0mLXpEth4B5bFog==", "ranger"=>{"name"=>"Jackson", "park_ids"=>["", "5", "1"]}, "commit"=>"Create Ranger"}
+  [1m[36mPark Load (7.2ms)[0m  [1m[34mSELECT "parks".* FROM "parks" WHERE "parks"."id" IN (5, 1)[0m
+  [1m[35m (6.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (17.1ms)[0m  [1m[32mINSERT INTO "rangers" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Jackson"], ["created_at", "2017-06-13 17:50:38.192738"], ["updated_at", "2017-06-13 17:50:38.192738"]]
+  [1m[35mSQL (7.5ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 5], ["ranger_id", 7], ["created_at", "2017-06-13 17:50:38.212198"], ["updated_at", "2017-06-13 17:50:38.212198"]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 1], ["ranger_id", 7], ["created_at", "2017-06-13 17:50:38.221190"], ["updated_at", "2017-06-13 17:50:38.221190"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/rangers
+Completed 302 Found in 89ms (ActiveRecord: 46.7ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-13 10:50:38 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 19ms (Views: 17.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/7" for 127.0.0.1 at 2017-06-13 10:50:43 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (1.0ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 7]]
+  Rendered rangers/show.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 47ms (Views: 38.4ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-13 10:51:04 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 33ms (Views: 29.5ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/parks" for 127.0.0.1 at 2017-06-13 10:53:28 -0700
+Processing by ParksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"00N9R6ajdqvtiTtRx4dd+rE1b3intW3rXxZpzgJF/fzmuP74ts+iu3AKSry8MQp5N4YCfMY48FB3XfnERLiSZA==", "park"=>{"name"=>"Olympic National Forest", "description"=>"Olympic National Forest encompasses the varied landscape of Washington’s Olympic Peninsula from lush rain forests to deep canyons to high mountain ridges to ocean beaches. This diverse and scenic forest reaches the mid elevations of the Olympic Mountains, surrounding Olympic National Park", "picture"=>"https://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5261176.jpg", "ranger_ids"=>["", "1", "7", "4"]}, "commit"=>"Create Park"}
+  [1m[36mRanger Load (0.7ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" WHERE "rangers"."id" IN (1, 7, 4)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "parks" ("name", "description", "picture", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Olympic National Forest"], ["description", "Olympic National Forest encompasses the varied landscape of Washington’s Olympic Peninsula from lush rain forests to deep canyons to high mountain ridges to ocean beaches. This diverse and scenic forest reaches the mid elevations of the Olympic Mountains, surrounding Olympic National Park"], ["picture", "https://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5261176.jpg"], ["created_at", "2017-06-13 17:53:28.474828"], ["updated_at", "2017-06-13 17:53:28.474828"]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 6], ["ranger_id", 1], ["created_at", "2017-06-13 17:53:28.477512"], ["updated_at", "2017-06-13 17:53:28.477512"]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 6], ["ranger_id", 7], ["created_at", "2017-06-13 17:53:28.479903"], ["updated_at", "2017-06-13 17:53:28.479903"]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "parks_rangers" ("park_id", "ranger_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["park_id", 6], ["ranger_id", 4], ["created_at", "2017-06-13 17:53:28.481634"], ["updated_at", "2017-06-13 17:53:28.481634"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/parks
+Completed 302 Found in 28ms (ActiveRecord: 4.5ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 10:53:28 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 25ms (Views: 23.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/6" for 127.0.0.1 at 2017-06-13 10:53:31 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 6]]
+  Rendered parks/show.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 43ms (Views: 36.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-13 10:53:44 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.7ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 28ms (Views: 24.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/rangers/4" for 127.0.0.1 at 2017-06-13 10:53:50 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 4]]
+  Rendered rangers/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 29ms (Views: 24.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-13 10:54:28 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (1.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 44ms (Views: 37.1ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-13 10:58:40 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (2.0ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 45ms (Views: 38.3ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/parks/6" for 127.0.0.1 at 2017-06-13 11:02:44 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.8ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 6]]
+  Rendered parks/show.html.erb within layouts/application (243.3ms)
+Completed 500 Internal Server Error in 251ms (ActiveRecord: 1.1ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `rangers' for #<#<Class:0x007fd7f4bd1018>:0x007fd7ef681ec8>
+Did you mean?  rangers_url):
+    13: 		<% @park.rangers.each do |r| %>
+    14: 			<div class="alert alert-info">
+    15: 				<h3>
+    16: 					<a href="/rangers/<%= r.id %>">Ranger<% rangers.name %></a>
+    17: 				</h3>
+    18: 			</div>
+    19: 		<% end %>
+  
+app/views/parks/show.html.erb:16:in `block in _app_views_parks_show_html_erb___4483964559724585872_70282705640160'
+app/views/parks/show.html.erb:13:in `_app_views_parks_show_html_erb___4483964559724585872_70282705640160'
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:03:48 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 38ms (Views: 32.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/6" for 127.0.0.1 at 2017-06-13 11:03:53 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.8ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 6]]
+  Rendered parks/show.html.erb within layouts/application (6.8ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 1.1ms)
+
+
+  
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    13: 		<% @park.rangers.each do |r| %>
+    14: 			<div class="alert alert-info">
+    15: 				<h3>
+    16: 					<a href="/rangers/<%= r.id %>">Ranger<% @rangers.name %></a>
+    17: 				</h3>
+    18: 			</div>
+    19: 		<% end %>
+  
+app/views/parks/show.html.erb:16:in `block in _app_views_parks_show_html_erb___4483964559724585872_70282749247700'
+app/views/parks/show.html.erb:13:in `_app_views_parks_show_html_erb___4483964559724585872_70282749247700'
+Started GET "/parks/6" for 127.0.0.1 at 2017-06-13 11:05:22 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 6]]
+  Rendered parks/show.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 38ms (Views: 33.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/rangers/4" for 127.0.0.1 at 2017-06-13 11:05:27 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.9ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 4]]
+  Rendered rangers/show.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 30ms (Views: 25.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/parks/6" for 127.0.0.1 at 2017-06-13 11:05:45 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.7ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 6]]
+  Rendered parks/show.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 34ms (Views: 29.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/parks/6" for 127.0.0.1 at 2017-06-13 11:05:48 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.7ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 6]]
+  Rendered parks/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 22ms (Views: 18.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-13 11:05:55 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 26ms (Views: 23.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:05:58 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 28ms (Views: 24.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/6" for 127.0.0.1 at 2017-06-13 11:06:01 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (1.1ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 6]]
+  Rendered parks/show.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 41ms (Views: 35.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/parks/3" for 127.0.0.1 at 2017-06-13 11:06:06 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 3]]
+  Rendered parks/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 29ms (Views: 24.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/3/edit" for 127.0.0.1 at 2017-06-13 11:06:12 -0700
+Processing by ParksController#edit as HTML
+  Parameters: {"authenticity_token"=>"MKrJ/3C1u3HXgo8ZMrlfY39MoeKpbqteptrQrfFBWGInY0ciA3KnCXFF87h0hdW2OiW08XCmijTQhWhGm2Swjw==", "id"=>"3"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering parks/edit.html.erb within layouts/application
+  Rendered parks/edit.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 38ms (Views: 34.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/parks/3/edit" for 127.0.0.1 at 2017-06-13 11:06:23 -0700
+Processing by ParksController#edit as HTML
+  Parameters: {"authenticity_token"=>"MKrJ/3C1u3HXgo8ZMrlfY39MoeKpbqteptrQrfFBWGInY0ciA3KnCXFF87h0hdW2OiW08XCmijTQhWhGm2Swjw==", "id"=>"3"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering parks/edit.html.erb within layouts/application
+  Rendered parks/edit.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 22ms (Views: 19.1ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/parks/3" for 127.0.0.1 at 2017-06-13 11:06:25 -0700
+Processing by ParksController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ztN5rRq0hkQq2gPcBez9jtZ09hjw6nhUL8yKM4izQgbZGvdwaXOaPIwdf31D0Hdbkx3jCykiWT5ZkzLY4paq6w==", "park"=>{"name"=>"Mt. Baker National Park", "description"=>"Snow and ice-covered Mount Baker, located in northern Washington, is the highest peak in the North Cascades (3,286 m or 10,781 ft) and the northernmost volcano in the conterminous United States. It is the only U.S. volcano in the Cascade Range that has been affected by both alpine and continental glaciation.Jan 3, 2017", "picture"=>"https://volcanoes.usgs.gov/vsc/images/baker/Mount-Baker-home.jpg"}, "commit"=>"Update Park", "id"=>"3"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/parks
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:06:25 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 28ms (Views: 25.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/1" for 127.0.0.1 at 2017-06-13 11:06:27 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 1]]
+  Rendered parks/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 27ms (Views: 23.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/rangers/5" for 127.0.0.1 at 2017-06-13 11:06:33 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mRanger Load (0.2ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 5]]
+  Rendered rangers/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 27ms (Views: 23.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-13 11:06:42 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 38ms (Views: 33.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/parks/4" for 127.0.0.1 at 2017-06-13 11:07:10 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 4]]
+  Rendered parks/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 28ms (Views: 24.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/rangers/5" for 127.0.0.1 at 2017-06-13 11:07:12 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mRanger Load (0.2ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 5]]
+  Rendered rangers/show.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 31ms (Views: 26.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/4" for 127.0.0.1 at 2017-06-13 11:07:16 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 4]]
+  Rendered parks/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 32ms (Views: 27.8ms | ActiveRecord: 0.5ms)
+
+
+Started DELETE "/parks/4" for 127.0.0.1 at 2017-06-13 11:07:18 -0700
+Processing by ParksController#destroy as HTML
+  Parameters: {"authenticity_token"=>"avgvioRC9waXFR+cw3t6FD5s+LSZqVk+IWaLe012FXN9MaFX94XrfjHSYz2FR/DBewXtp0BheFRXOTOQJ1P9ng==", "id"=>"4"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 4]]
+  [1m[35mSQL (2.5ms)[0m  [1m[31mDELETE FROM "parks_rangers" WHERE "parks_rangers"."park_id" = $1 AND "parks_rangers"."ranger_id" = 5[0m  [["park_id", 4]]
+  [1m[35mSQL (1.4ms)[0m  [1m[31mDELETE FROM "parks" WHERE "parks"."id" = $1[0m  [["id", 4]]
+Redirected to http://localhost:3000/parks
+Completed 302 Found in 11ms (ActiveRecord: 4.6ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:07:18 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 22ms (Views: 20.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/4" for 127.0.0.1 at 2017-06-13 11:07:24 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.2ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Park with 'id'=4):
+  
+app/controllers/parks_controller.rb:17:in `show'
+Started GET "/rangers" for 127.0.0.1 at 2017-06-13 11:07:30 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 27ms (Views: 23.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/rangers/6" for 127.0.0.1 at 2017-06-13 11:07:35 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mRanger Load (0.2ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 6]]
+  Rendered rangers/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 30ms (Views: 26.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:07:41 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 40ms (Views: 37.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/2" for 127.0.0.1 at 2017-06-13 11:07:46 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 2]]
+  Rendered parks/show.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 31ms (Views: 26.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-13 11:08:05 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 28ms (Views: 25.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:08:05 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 53ms (Views: 49.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/3" for 127.0.0.1 at 2017-06-13 11:08:14 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPark Load (0.2ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 3]]
+  Rendered parks/show.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 48ms (Views: 43.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-13 11:12:08 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 53ms (Views: 49.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-13 11:12:09 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 39ms (Views: 20.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:12:10 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 34ms (Views: 29.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-13 11:12:11 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 39ms (Views: 34.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-13 11:12:12 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 31ms (Views: 27.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-13 11:12:13 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 38ms (Views: 35.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-13 11:12:16 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 39ms (Views: 36.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-13 11:12:16 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 28ms (Views: 25.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:12:17 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 33ms (Views: 29.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-13 11:12:18 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 41ms (Views: 37.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-13 11:12:19 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 37ms (Views: 33.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-13 11:12:20 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 41ms (Views: 37.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-13 11:12:21 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 38ms (Views: 34.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-13 11:12:23 -0700
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 31ms (Views: 28.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:12:23 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 32ms (Views: 28.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-13 11:12:24 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 37ms (Views: 33.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-13 11:12:32 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.5ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (11.1ms)
+Completed 200 OK in 38ms (Views: 35.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-13 11:12:39 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 33ms (Views: 30.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-06-13 11:52:56 -0700
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 253ms (Views: 242.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:57:07 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (1.1ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (37.0ms)
+Completed 200 OK in 111ms (Views: 61.5ms | ActiveRecord: 24.2ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 11:57:30 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 28ms (Views: 25.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-13 11:57:34 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (1.1ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (12.1ms)
+Completed 200 OK in 51ms (Views: 28.4ms | ActiveRecord: 6.4ms)
+
+
+Started GET "/parks/3" for 127.0.0.1 at 2017-06-13 11:58:44 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.7ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 3]]
+  Rendered parks/show.html.erb within layouts/application (46.9ms)
+Completed 200 OK in 87ms (Views: 75.4ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 12:00:05 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.7ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 52ms (Views: 47.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-13 12:00:09 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 54ms (Views: 50.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/1" for 127.0.0.1 at 2017-06-13 12:00:10 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 1]]
+  Rendered rangers/show.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 36ms (Views: 27.7ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 12:00:20 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (0.5ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 31ms (Views: 27.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/parks/1" for 127.0.0.1 at 2017-06-13 12:00:21 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 1]]
+  Rendered parks/show.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 28ms (Views: 24.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-13 12:00:56 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.4ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 35ms (Views: 31.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/rangers/7" for 127.0.0.1 at 2017-06-13 12:00:59 -0700
+Processing by RangersController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mRanger Load (0.3ms)[0m  [1m[34mSELECT  "rangers".* FROM "rangers" WHERE "rangers"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering rangers/show.html.erb within layouts/application
+  [1m[36mPark Load (0.6ms)[0m  [1m[34mSELECT "parks".* FROM "parks" INNER JOIN "parks_rangers" ON "parks"."id" = "parks_rangers"."park_id" WHERE "parks_rangers"."ranger_id" = $1[0m  [["ranger_id", 7]]
+  Rendered rangers/show.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 37ms (Views: 32.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/parks/5" for 127.0.0.1 at 2017-06-13 12:02:48 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (0.7ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 5]]
+  Rendered parks/show.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 30ms (Views: 25.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/parks" for 127.0.0.1 at 2017-06-13 12:03:04 -0700
+Processing by ParksController#index as HTML
+  Rendering parks/index.html.erb within layouts/application
+  [1m[36mPark Load (1.8ms)[0m  [1m[34mSELECT "parks".* FROM "parks" ORDER BY "parks"."name" ASC[0m
+  Rendered parks/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 30ms (Views: 25.7ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/parks/5" for 127.0.0.1 at 2017-06-13 12:03:06 -0700
+Processing by ParksController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mPark Load (0.4ms)[0m  [1m[34mSELECT  "parks".* FROM "parks" WHERE "parks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering parks/show.html.erb within layouts/application
+  [1m[36mRanger Load (1.3ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" INNER JOIN "parks_rangers" ON "rangers"."id" = "parks_rangers"."ranger_id" WHERE "parks_rangers"."park_id" = $1[0m  [["park_id", 5]]
+  Rendered parks/show.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 42ms (Views: 36.0ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/rangers" for 127.0.0.1 at 2017-06-13 12:05:17 -0700
+Processing by RangersController#index as HTML
+  Rendering rangers/index.html.erb within layouts/application
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered rangers/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 38ms (Views: 34.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/parks/new" for 127.0.0.1 at 2017-06-13 12:05:20 -0700
+Processing by ParksController#new as HTML
+  Rendering parks/new.html.erb within layouts/application
+  [1m[36mRanger Load (0.6ms)[0m  [1m[34mSELECT "rangers".* FROM "rangers" ORDER BY "rangers"."name" ASC[0m
+  Rendered parks/new.html.erb within layouts/application (30.5ms)
+Completed 200 OK in 61ms (Views: 57.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/rangers/new" for 127.0.0.1 at 2017-06-13 12:06:00 -0700
+Processing by RangersController#new as HTML
+  Rendering rangers/new.html.erb within layouts/application
+  [1m[36mPark Load (0.3ms)[0m  [1m[34mSELECT "parks".* FROM "parks"[0m
+  Rendered rangers/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 31ms (Views: 27.7ms | ActiveRecord: 0.3ms)
+
+
