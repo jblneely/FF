@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: rails-mtom_development
+  database: FF_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: rails-mtom_test
+  database: FF_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: rails-mtom_production
-  username: rails-mtom
+  database: rails-FF_production
+  username: rails-FF
   password: <%= ENV['RAILS-MTOM_DATABASE_PASSWORD'] %>

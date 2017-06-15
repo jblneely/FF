@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  description: MyText
+  open: 2017-06-14
+  completed: 2017-06-14
+  duration: MyText
+  location: MyText
+
+two:
+  title: MyText
+  description: MyText
+  open: 2017-06-14
+  completed: 2017-06-14
+  duration: MyText
+  location: MyText

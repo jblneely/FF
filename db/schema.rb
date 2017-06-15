@@ -10,34 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608204710) do
+ActiveRecord::Schema.define(version: 20170615003956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "parks", force: :cascade do |t|
-    t.string "name"
+  create_table "actions", force: :cascade do |t|
+    t.text "title"
     t.text "description"
-    t.text "picture"
+    t.date "open"
+    t.date "completed"
+    t.text "duration"
+    t.text "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "parks_rangers", force: :cascade do |t|
-    t.bigint "park_id"
-    t.bigint "ranger_id"
+  create_table "actions_matters", force: :cascade do |t|
+    t.bigint "action_id"
+    t.bigint "matter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["park_id"], name: "index_parks_rangers_on_park_id"
-    t.index ["ranger_id"], name: "index_parks_rangers_on_ranger_id"
+    t.index ["action_id"], name: "index_actions_matters_on_action_id"
+    t.index ["matter_id"], name: "index_actions_matters_on_matter_id"
   end
 
-  create_table "rangers", force: :cascade do |t|
-    t.string "name"
+  create_table "matters", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.date "open"
+    t.date "close"
+    t.date "due"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "parks_rangers", "parks"
-  add_foreign_key "parks_rangers", "rangers"
+  add_foreign_key "actions_matters", "actions"
+  add_foreign_key "actions_matters", "matters"
 end

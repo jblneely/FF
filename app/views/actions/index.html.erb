@@ -1,0 +1,13 @@
+<h1 class="text-center">Activities</h1>
+<h3 class="text-center"></h3>
+
+<div class="container">
+  <% @actions.each do |r| %>
+    <div class="alert alert-info">
+      <a href="/actions/<%= r.id %>">
+        Action <%= r.title %>
+      </a>
+    </div>
+
+  <% end %>
+</div>

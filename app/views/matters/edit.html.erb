@@ -1,0 +1,27 @@
+<h1 class="text-center">Edit Matter</h1>
+
+<div class="container">
+	<%= form_for @matter do |f| %>
+		<div class="form-group">
+			<%= f.label :title %>
+			<%= f.text_field :title, :class => "form-control", :value => @matter.title %>
+		</div>
+		<div class="form-group">
+			<%= f.label :description %>
+			<%= f.text_area :description, :class => "form-control", :value => @matter.description %>
+		</div>
+		<div class="form-group">
+			<%= f.label :open %>
+			<%= f.date_field :open, :class => "form-control" :value => @matter.due %>
+		</div>
+		<div class="form-group">
+			<%= f.label :close %>
+			<%= f.date_field :close, :class => "form-control" :value => @matter.due %>
+		</div>
+		<div class="form-group">
+			<%= f.label :due %>
+			<%= f.date_field :due, :class => "form-control", :value => @matter.due %>
+		</div>
+		<%= f.submit :class => "btn btn-success" %>
+	<% end %>
+</div>

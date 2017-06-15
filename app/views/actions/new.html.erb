@@ -1,0 +1,13 @@
+<h1 class="text-center">New Activity</h1>
+
+<div class="continer">
+<%= form_for @action do |f| %>
+	<div class="form-group">
+		<%= f.label :title %>
+		<%= f.text_field :title, :class => "form-control" %>
+	</div>
+		<%= f.collection_check_boxes :matter_ids, @matters, :id, :title %>
+		<%= f.submit :class => "btn btn-primary" %>
+
+<% end %>
+</div>

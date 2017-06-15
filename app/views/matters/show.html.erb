@@ -1,0 +1,23 @@
+<h1 class="text-center"><%= @matter.title %></h1>
+<div class="container">
+	<div>
+		<h4><%= @matter.description %></h4>
+	</div>
+
+
+<div>
+	<h2>Activities:</h2>
+		<% @matter.actions.each do |r| %>
+			<div class="alert alert-info">
+				<h3>
+					<a href="/actions/<%= r.id %>">Action<% r.name %></a>
+				</h3>
+			</div>
+		<% end %>
+	</div>
+		<h2>METHOD CRUD:</h2>
+			<%= link_to 'Update this Matter?', edit_matter_path(@matter), method: :get, :class => "btn btn-warning" %>
+			<%= link_to 'Delete This Matter?', matter_path(@matter), method: :delete, :class => "btn btn-danger" %>
+	</div>
+
+

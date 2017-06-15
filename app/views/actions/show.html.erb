@@ -1,0 +1,27 @@
+<h1 class="text-center">Activity <%= @action.title %> Details</h1>
+<h4 class="text-center">Activity <%= @action.title %> is available to relate to all Matters</h4>
+
+<h2 class="text-center">Matters associated with <%= @action.name %></h2>
+
+<div class="container text-center">
+	<% if @action.matters.length > 0 %>
+		<% @action.matters.each do |p| %>
+			<div class="alert alert-info">
+				<h3>
+					<a href="/matters/<%= p.id %>"><%= p.name %></a>
+				</h3>	
+			</div>
+		<% end %>
+	<% else %>
+		<div class="alert alert-info">
+			Activity <%= @action.title %> is still waiting to be assigned to a Matter.
+		</div>
+		</div>
+		<h2>ACTION CRUD:</h2>
+			<%= link_to 'Update this Action?', edit_action_path(@action), method: :get, :class => "btn btn-warning" %>
+			<%= link_to 'Delete This Action?', action_path(@action), method: :delete, :class => "btn btn-danger" %>
+	</div>
+
+	<% end %>
+</div>
+

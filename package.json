@@ -1,5 +1,7 @@
 {
   "name": "rails-mtom",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap-year-calendar": "^1.1.1"
+  }
 }
